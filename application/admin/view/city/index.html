@@ -1,0 +1,52 @@
+{include file='public/head'}
+<div class="pd-30">
+    <table class="table table-border table-bg table-bordered table-hover">
+        <thead>
+        <tr>
+            <th width="10%">ID</th>
+            <th width="20%">城市名字</th>
+            <th width="10%">省城</th>
+            <th width="20%">新增时间</th>
+            <th width="10%">下辖市</th>
+            <th width="10%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name='citysInfo' id='vo'}
+        <tr>
+            <td>{$vo.id}</td>
+            <td>{$vo.name}</td>
+            <td>{$mCitysArr[$vo.id] ? $mCitysArr[$vo.id]:''}</td>
+            <td>{$vo.create_time}</td>
+            <td><a href="{:url('city/index',['parent_id' => $vo.id])}">查看</a></td>
+            <td>
+                <a onClick="system_edit('修改信息','{:url('city/detail',['id' => $vo.id])}', '1','700','480')"><i class="Hui-iconfont">&#xe6df;</i>修改</a>
+                <a onclick="system_del('{:url('city/delete',['id' => $vo.id])}')"><i class="Hui-iconfont">&#xe609;</i>删除</a>
+            </td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+</div>
+{include file='public/foot'}
+<script>
+    $(function(){
+        $('.radio-box input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+    });
+    //修改信息
+    function system_edit(title,url,id,w,h){
+        layer_show(title,url,w,h);
+    }
+    //删除信息
+    function system_del(url){
+        layer.confirm('确认要删除吗？',function(){
+            window.location.href = url;
+        });
+    }
+</script>
+</body>
+</html>
