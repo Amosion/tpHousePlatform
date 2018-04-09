@@ -1,0 +1,37 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Amadeus
+ * Date: 2018/4/5
+ * Time: 22:55
+ */
+
+namespace app\common\model;
+
+use think\Model;
+
+class User extends Model
+{
+    /**
+     * 用户注册
+     * @param array $data
+     * @return false|int
+     */
+    public function add($data = []){
+        if(!is_array($data)){
+            exception('传递的数据不是数组');
+        }
+        $data['status'] = 1;
+        return $this->data($data)->allowField(true)->save();
+    }
+
+    /**
+     * @param $data
+     * @param $id
+     * @return false|int
+     */
+    public function updateById($data, $id){
+        return $this->allowField(true)->save($data, ['id'=>$id]);
+    }
+
+}
