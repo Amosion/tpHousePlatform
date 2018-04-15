@@ -33,7 +33,7 @@ class Login extends Controller
             }
             //保存登录时间
             model('User')->updateById(['last_login_time' => time()], $ret->id);
-            session('$account', $ret, 'user');
+            session('account', $ret, 'user');
             //不同角色登录
             $url = '';
             switch ($ret->character_id){
@@ -45,7 +45,7 @@ class Login extends Controller
             return $this->success('登录成功', url($url));
         } else {
             //获取session
-            $account = session('$account', '', 'user');
+            $account = session('account', '', 'user');
             if ($account && $account->id) {
                 //不同角色登录
                 $url = '';

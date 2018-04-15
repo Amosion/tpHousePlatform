@@ -9,6 +9,7 @@
 namespace app\user\controller;
 
 use think\Controller;
+use think\Db;
 
 class Register extends Controller
 {
@@ -46,18 +47,25 @@ class Register extends Controller
         }
         //账户信息入库
         //自动生成密码的校验字符串
+        Db::startTrans();
         $data['code'] = mt_rand(100,10000);
         $userData = [
             'username' => $data['email'],
             'password' => md5($data['password'].$data['code']),
             'code' =>$data['code'],
-            'character_id' => 2,
+            'character_id' => 3,
         ];
-
         $accountId = $this->obj->add($userData);
-        if(!$accountId){
+        $infoData = [
+            'user_id' => $accountId,
+            'email' => $data['email']
+        ];
+        $userinfoId = model('Userinfo')->add($infoData);
+        if(!$accountId || !$userinfoId){
+            Db::rollback();
             $this->error('注册失败');
         }else{
+            Db::commit();
             $this->success('注册成功');
         }
     }

@@ -1,14 +1,14 @@
 <header class="navbar-wrapper">
     <div class="navbar navbar-fixed-top">
         <div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">房屋租赁平台</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="#">H-ui</a>
-            <span class="logo navbar-slogan f-l mr-10 hidden-xs">管理员</span>
+            <span class="logo navbar-slogan f-l mr-10 hidden-xs">租客</span>
             <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
 
             <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
                 <ul class="cl">
                     <li class="Hui-iconfont">&#xe72c;</li>
                     <li class="dropDown dropDown_hover">
-                        <a href="#" class="dropDown_A">超级管理员</a>
+                        <a href="#" class="dropDown_A">租客</a>
                         <ul class="dropDown-menu menu radius box-shadow">
                             <li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
                             <li><a href="#">切换账户</a></li>
@@ -34,33 +34,45 @@
 <aside class="Hui-aside">
     <div class="menu_dropdown bk_2">
         <div class="mt-10 mb-10">
-            <div class="text-c"><img class="avatar size-XXL round" src="__STATIC__/dist/img/user1-128x128.jpg" alt="..."></div>
+            <div class="text-c">
+                <img class="avatar size-XXL round" src="__STATIC__/dist/img/user3-128x128.jpg" alt="。。。">
+            </div>
             <div class="text-c">NAME</div>
         </div>
         <dl id="menu-city">
-            <dt><i class="Hui-iconfont">&#xe616;</i> 城市管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt><i class="Hui-iconfont">&#xe616;</i> 个人信息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="{:url('city/index')}" data-title="城市一览" href="javascript:void(0)">城市一览</a></li>
-                    <li><a data-href="{:url('city/add')}" data-title="城市添加" href="javascript:void(0)">城市添加</a></li>
+                    <li><a data-href="{:url('userinfo/index')}" data-title="基本信息" href="javascript:void(0)">基本消息</a></li>
+                    <li><a data-href="#" data-title="我的头像" href="javascript:void(0)">我的头像</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-city">
+            <dt><i class="Hui-iconfont">&#xe616;</i> 消息中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a data-href="#" data-title="系统消息" href="javascript:void(0)">系统消息</a></li>
+                    <li><a data-href="#" data-title="我的私信" href="javascript:void(0)">我的私信</a></li>
+                    <li><a data-href="#" data-title="回复我的" href="javascript:void(0)">回复我的</a></li>
                 </ul>
             </dd>
         </dl>
         <dl id="menu-user">
-            <dt><i class="Hui-iconfont">&#xe613;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt><i class="Hui-iconfont">&#xe613;</i> 租房管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="picture-list.html" data-title="租客管理" href="javascript:void(0)">租客管理</a></li>
-                    <li><a data-href="picture-list.html" data-title="房东管理" href="javascript:void(0)">房东管理</a></li>
+                    <li><a data-href="picture-list.html" data-title="预约管理" href="javascript:void(0)">预约管理</a></li>
+                    <li><a data-href="picture-list.html" data-title="租房历史" href="javascript:void(0)">租房历史</a></li>
                 </ul>
             </dd>
         </dl>
         <dl id="menu-check">
-            <dt><i class="Hui-iconfont">&#xe620;</i> 验证管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt><i class="Hui-iconfont">&#xe620;</i> 收藏管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="product-brand.html" data-title="房东验证" href="javascript:void(0)">房东验证</a></li>
-                    <li><a data-href="product-category.html" data-title="房屋验证" href="javascript:void(0)">房屋验证</a></li>
+                    <li><a data-href="product-brand.html" data-title="房屋关注" href="javascript:void(0)">房屋关注</a></li>
+                    <li><a data-href="product-category.html" data-title="用户关注" href="javascript:void(0)">用户关注</a></li>
                 </ul>
             </dd>
         </dl>

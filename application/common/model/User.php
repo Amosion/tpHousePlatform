@@ -13,19 +13,21 @@ use think\Model;
 class User extends Model
 {
     /**
-     * 用户注册
+     * 用户添加数据
      * @param array $data
-     * @return false|int
+     * @return mixed
      */
     public function add($data = []){
         if(!is_array($data)){
             exception('传递的数据不是数组');
         }
         $data['status'] = 1;
-        return $this->data($data)->allowField(true)->save();
+        $this->data($data)->allowField(true)->save();
+        return $this->id;
     }
 
     /**
+     * 根据id更新数据
      * @param $data
      * @param $id
      * @return false|int

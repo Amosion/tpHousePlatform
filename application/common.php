@@ -10,3 +10,32 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+/**
+ * 个人信息城市区域填入
+ * @param $region
+ * @param $flag
+ * @return bool|string|void
+ */
+function getCityName($region,$flag){
+    if(empty($region)){
+        echo "参数传递不为空";
+        return;
+    }
+    if(preg_match('/,/',$region)){
+        $cityPath = explode(',',$region);
+        $cityId = $cityPath[0];
+        $seCityId = $cityPath[1];
+    }else{
+        $cityId = $region;
+    }
+    /**
+     * flag = 0 return 一级城市id
+     * flag = 1 return 二级城市名
+     */
+    if (!$flag){
+        return $cityId;
+    }else{
+        $seCity = model('City')->get($seCityId);
+        return $seCity->name;
+    }
+}
