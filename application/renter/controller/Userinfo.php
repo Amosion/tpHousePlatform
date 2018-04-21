@@ -58,4 +58,25 @@ class Userinfo extends Controller
         }
     }
 
+    /**
+     * 个人头像设置
+     * @return mixed
+     */
+    public function portrait(){
+        if(request()->post()){
+            $data = input('post.');
+            $info = model('User')->updateById(['image' => $data['image']],$data['id']);
+            if($info){
+                $this->success('保存成功');
+            }else{
+                $this->error('保存失败');
+            }
+        }else{
+            $user = session('account','','user');
+            return $this->fetch('',[
+                'user' => $user
+            ]);
+        }
+    }
+
 }

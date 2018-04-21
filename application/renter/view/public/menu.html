@@ -35,16 +35,16 @@
     <div class="menu_dropdown bk_2">
         <div class="mt-10 mb-10">
             <div class="text-c">
-                <img class="avatar size-XXL round" src="__STATIC__/dist/img/user3-128x128.jpg" alt="。。。">
+                <img class="avatar size-XXL round" src="{$user->image}" alt="。。。">
             </div>
-            <div class="text-c">NAME</div>
+            <div class="text-c">{$user->username}</div>
         </div>
         <dl id="menu-city">
             <dt><i class="Hui-iconfont">&#xe616;</i> 个人信息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="{:url('userinfo/index')}" data-title="基本信息" href="javascript:void(0)">基本消息</a></li>
-                    <li><a data-href="#" data-title="我的头像" href="javascript:void(0)">我的头像</a></li>
+                    <li><a data-href="{:url('userinfo/index')}" data-title="基本信息" href="javascript:void(0)">基本信息</a></li>
+                    <li><a data-href="{:url('userinfo/portrait')}" data-title="我的头像" href="javascript:void(0)">我的头像</a></li>
                 </ul>
             </dd>
         </dl>
