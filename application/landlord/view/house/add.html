@@ -1,0 +1,157 @@
+{include file='public/head'}
+<div class="pd-20">
+    <form action="" method="post" class="form form-horizontal" id="demoform">
+        <fieldset>
+            <legend>城市添加</legend>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">房屋名称：</label>
+                <div class="formControls col-xs-4 col-sm-3">
+                    <input type="text" class="input-text" autocomplete="off" placeholder="" name="name">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">描述：</label>
+                <div class="formControls col-xs-4 col-sm-3">
+                    <textarea class="textarea" autocomplete="off" placeholder="说些什么" name="description"></textarea>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">价格：</label>
+                <div class="formControls col-xs-4 col-sm-3">
+                    <input type="text" class="input-text" autocomplete="off" placeholder="" name="price">元
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">面积：</label>
+                <div class="formControls col-xs-4 col-sm-3">
+                    <input type="text" class="input-text" autocomplete="off" placeholder="" name="area">㎡
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">户型：</label>
+                <div class="formControls col-xs-1 col-sm-1">
+                    <input type="text" class="input-text" autocomplete="off" placeholder="" name="type_shi">
+                </div>
+                <label style="width: auto;float: left">室</label>
+                <div class="formControls col-xs-1 col-sm-1">
+                    <input type="text" class="input-text" autocomplete="off" placeholder="" name="type_ting">
+                </div>
+                <label style="width: auto;float: left">厅</label>
+                <div class="formControls col-xs-1 col-sm-1">
+                    <input type="text" class="input-text" autocomplete="off" placeholder="" name="type3_wei">
+                </div>
+                <label style="width: auto;float: left">卫</label>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">租赁类型：</label>
+                <div class="formControls skin-minimal col-xs-4 col-sm-3">
+                    <div class="radio-box">
+                        <input type="radio" id="yes-1" name="rent_type" value="1"
+                               style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0; padding: 0; background: rgb(255, 255, 255); border: 0; opacity: 0;">
+                        <label for="yes-1">整租</label>
+                    </div>
+                    <div class="radio-box">
+                        <input type="radio" id="no-0" name="rent_type" value="0" checked=""
+                               style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0; padding: 0; background: rgb(255, 255, 255); border: 0; opacity: 0;">
+                        <label for="no-0" class="">合租</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">房屋方位：</label>
+                <div class="formControls col-xs-4 col-sm-3">
+                    <input type="text" class="input-text" autocomplete="off" placeholder="" name="orient">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">地址：</label>
+                <div class="formControls col-xs-4 col-sm-3">
+                    <span class="select-box">
+							<select id="city" class="select" size="1" name="city"
+                                    onmousedown="this.size=6" onblur="this.size=1" onchange="this.size=1">
+								<option value="0">选择一级地区</option>
+                                {volist name='citysInfo' id='vo'}
+								<option value="{$vo.id}">{$vo.name}</option>
+                                {/volist}
+							</select>
+                    </span>
+                </div>
+                <div class="formControls col-xs-4 col-sm-3">
+                    <span class="select-box">
+							<select id="se_city" class="select" name="se_city"
+                                    onmousedown="this.size=6" onblur="this.size=1" onchange="this.size=1">
+								<option>无</option>
+							</select>
+                    </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                    <input class="btn btn-primary radius" type="submit" value="提交">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{include file='public/foot'}
+<script>
+    var SCOPE ={
+        'city_url' : "{:url('api/city/getCitysByParentId')}"
+    };
+    var flag = 1;
+    var once = function () {
+        //只运行一次
+        if(flag){
+            //二级城市获取-点击二级
+            city_id = $('#city').val();
+            url = SCOPE.city_url;
+            postData = {'id' : city_id};
+            $.post(url,postData,function (res) {
+                if(res.status === 1){
+                    data = res.data;
+                    city_html = "";
+                    $(data).each(function () {
+                        city_html += "<option value="+this.id+">"+this.name+"</option>";
+                    });
+                    $('#se_city').html(city_html);
+                }else if(res.status === 0){
+                    $('#se_city').html('');
+                }
+            });
+            flag = 0;
+        }
+    };
+    $(function(){
+        //单选框
+        $('.radio-box input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+        //二级城市获取-点击二级
+        $('#se_city').click(function () {
+            once();
+        });
+        //二级城市获取-点击一级
+        $('#city').change(function () {
+            city_id = $(this).val();
+            url = SCOPE.city_url;
+            postData = {'id' : city_id};
+            $.post(url,postData,function (res) {
+                if(res.status === 1){
+                    data = res.data;
+                    city_html = "";
+                    $(data).each(function () {
+                        city_html += "<option value="+this.id+">"+this.name+"</option>";
+                    });
+                    $('#se_city').html(city_html);
+                }else if(res.status === 0){
+                    $('#se_city').html('无');
+                }
+            },'json');
+        });
+    });
+</script>
+</body>
+</html>

@@ -39,3 +39,19 @@ function getCityName($region,$flag){
         return $seCity->name;
     }
 }
+
+/**
+ * 根据character_id身份输出
+ * @param $id
+ * @return string
+ */
+function showCharacter($id){
+    $role = '';
+    switch ($id){
+        case 1 : $role = '管理员';break;
+        case 2 : $role = '房东';break;
+        case 3 : $role = '租客';break;
+        default;
+    }
+    return $role;
+}

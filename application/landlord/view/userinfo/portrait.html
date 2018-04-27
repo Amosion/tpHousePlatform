@@ -1,0 +1,71 @@
+{include file='public/head'}
+<div class="pd-20">
+    <form class="row cl" method="post" action="{:url('userinfo/portrait')}">
+        <label class="form-label col-xs-4 col-sm-2">头像设置：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <input id="file_upload" type="file" multiple="true">
+            <img style="display: none" id="upload_org_code_img" src="">
+            <input id="file_upload_image" name="image" type="hidden" multiple="true" value="">
+        </div>
+        <label class="form-label col-xs-4 col-xs-offset-2 col-sm-2">
+            <input type="hidden" name="id" value="{$user->id}">
+            <input class="btn btn-primary" type="submit" value="保存">
+        </label>
+    </form>
+</div>
+{include file='public/foot'}
+<script>
+    const SCOPE = {
+            'uploadify_swf': '__STATIC__/lib/uploadify/uploadify.swf',
+            'image_upload': '{:url('api/image/upload')}'
+    };
+    $(function () {
+        $("#file_upload").uploadify({
+            'swf': SCOPE.uploadify_swf,
+            'uploader': SCOPE.image_upload,
+            'buttonText': '图片上传',
+            'fileTypeDesc': 'Image files',
+            'fileObjName': 'file',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            //'fileSizeLimit'   : '1024KB',
+            'onUploadSuccess': function (file, data, response) {
+                console.log(file);
+                console.log(data);
+                console.log(response);
+                if (response) {
+                    var obj = JSON.parse(data);
+                    $('#upload_org_code_img').attr("src", obj.data);
+                    $('#file_upload_image').attr("value", obj.data);
+                    $('#upload_org_code_img').show();
+
+                }
+
+            }
+        });
+
+        $("#file_upload_other").uploadify({
+            'swf': SCOPE.uploadify_swf,
+            'uploader': SCOPE.image_upload,
+            'buttonText': '图片上传',
+            'fileTypeDesc': 'Image files',
+            'fileObjName': 'file',
+            'fileTypeExts': '*.gif;*.jpg;*.png',
+            //'fileSizeLimit'   : '1024KB',
+            'onUploadSuccess': function (file, data, response) {
+                console.log(file);
+                console.log(data);
+                console.log(response);
+                if (response) {
+                    var obj = JSON.parse(data);
+                    $('#upload_org_code_img_other').attr("src", obj.data);
+                    $('#file_upload_image_other').attr("value", obj.data);
+                    $('#upload_org_code_img_other').show();
+
+                }
+
+            }
+        });
+    });
+</script>
+</body>
+</html>

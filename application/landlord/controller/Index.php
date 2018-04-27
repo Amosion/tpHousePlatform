@@ -7,7 +7,10 @@ class Index extends Controller
 {
     public function index()
     {
-        return $this->fetch();
+        $user = session('account','','user');
+        return $this->fetch('',[
+            'user' => $user
+        ]);
     }
 
     public function welcome(){
