@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Amadeus
- * Date: 2018/4/26
- * Time: 21:40
+ * Date: 2018/4/30
+ * Time: 0:14
  */
 
 namespace app\landlord\controller;
@@ -11,12 +11,12 @@ namespace app\landlord\controller;
 use think\Controller;
 use think\Request;
 
-class House extends Controller
+class Info extends Controller
 {
     private $obj;
     public function _initialize()
     {
-        $this->obj = model('House');
+        $this->obj = model('Info');
     }
 
     /**
@@ -60,6 +60,8 @@ class House extends Controller
             'orient' => $data['orient'],
             'city' => $data['city'].','.$data['se_city'],
             'address' => $data['address'],
+            'certify' => $data['certify'],
+            'image' => $data['image'],
             'owner_id' => $user->id
         ];
         $info = $this->obj->add($houseData);

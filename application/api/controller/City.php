@@ -12,6 +12,7 @@ use think\Controller;
 
 class City extends Controller
 {
+    private $obj;
     public function _initialize()
     {
         $this->obj = model('City');

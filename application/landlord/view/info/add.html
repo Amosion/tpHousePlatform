@@ -94,11 +94,20 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">面积：</label>
-                <div class="formControls col-xs-4 col-sm-2">
-                    <input type="text" class="input-text" autocomplete="off" placeholder="" name="area">
+                <label class="form-label col-xs-4 col-sm-2">房屋证明：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input id="file_upload" type="file" multiple="true">
+                    <img style="display: none" id="upload_org_code_img" src="" width="200" height="200">
+                    <input id="file_upload_image" name="certify" type="hidden" multiple="true" value="">
                 </div>
-                <label class="va-m">㎡</label>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">房屋预览图：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input id="file_upload_other" type="file" multiple="true">
+                    <img style="display: none" id="upload_org_code_img_other" src="" width="200" height="200">
+                    <input id="file_upload_image_other" name="image" type="hidden" multiple="true" value="">
+                </div>
             </div>
             <div class="row cl">
                 <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
@@ -111,30 +120,9 @@
 {include file='public/foot'}
 <script>
     var SCOPE ={
-        'city_url' : "{:url('api/city/getCitysByParentId')}"
-    };
-    var flag = 1;
-    var once = function () {
-        //只运行一次
-        if(flag){
-            //二级城市获取-点击二级
-            city_id = $('#city').val();
-            url = SCOPE.city_url;
-            postData = {'id' : city_id};
-            $.post(url,postData,function (res) {
-                if(res.status === 1){
-                    data = res.data;
-                    city_html = "";
-                    $(data).each(function () {
-                        city_html += "<option value="+this.id+">"+this.name+"</option>";
-                    });
-                    $('#se_city').html(city_html);
-                }else if(res.status === 0){
-                    $('#se_city').html('');
-                }
-            });
-            flag = 0;
-        }
+        'uploadify_swf': '__STATIC__/lib/uploadify/uploadify.swf',
+        'city_url' : "{:url('api/city/getCitysByParentId')}",
+        'image_upload' : "{:url('api/image/houseUpload')}"
     };
     $(function(){
         //单选框
@@ -143,6 +131,29 @@
             radioClass: 'iradio-blue',
             increaseArea: '20%'
         });
+        var flag = 1;
+        var once = function () {
+            //只运行一次
+            if(flag){
+                //二级城市获取-点击二级
+                city_id = $('#city').val();
+                url = SCOPE.city_url;
+                postData = {'id' : city_id};
+                $.post(url,postData,function (res) {
+                    if(res.status === 1){
+                        data = res.data;
+                        city_html = "";
+                        $(data).each(function () {
+                            city_html += "<option value="+this.id+">"+this.name+"</option>";
+                        });
+                        $('#se_city').html(city_html);
+                    }else if(res.status === 0){
+                        $('#se_city').html('');
+                    }
+                });
+                flag = 0;
+            }
+        };
         //二级城市获取-点击二级
         $('#se_city').click(function () {
             once();
@@ -166,6 +177,8 @@
             },'json');
         });
     });
+
 </script>
+<script src="__STATIC__/dist/js/imgupload.js"></script>
 </body>
 </html>

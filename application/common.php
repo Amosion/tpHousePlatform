@@ -14,7 +14,7 @@
  * 个人信息城市区域填入
  * @param $region
  * @param $flag
- * @return bool|string|void
+ * @return string|void
  */
 function getCityName($region,$flag){
     if(empty($region)){
@@ -27,19 +27,28 @@ function getCityName($region,$flag){
         $seCityId = $cityPath[1];
     }else{
         $cityId = $region;
+        $seCityId = '';
     }
     /**
      * flag = 0 return 一级城市id
-     * flag = 1 return 二级城市名
+     * flag = 1 return 二级城市id
+     * flag = 2 return 二级城市name
      */
-    if (!$flag){
-        return $cityId;
-    }else{
-        $seCity = model('City')->get($seCityId);
-        return $seCity->name;
+    $cityVal = '';
+    switch ($flag){
+        case 0:$cityVal = $cityId;break;
+        case 1:$cityVal = $seCityId;break;
+        case 2:
+            $seCity = model('City')->get($seCityId);
+            $cityVal = $seCity->name;
+            break;
+        default;
     }
+    return $cityVal;
 }
+function cityIdtoName($id){
 
+}
 /**
  * 根据character_id身份输出
  * @param $id

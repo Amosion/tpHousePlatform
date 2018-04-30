@@ -1,6 +1,6 @@
 {include file='public/head'}
 <div class="pd-20">
-    <form action="" method="post" class="form form-horizontal" id="demoform">
+    <form action="{:url('userinfo/add')}" method="post" class="form form-horizontal" id="demoform">
         <fieldset>
             <legend>个人信息</legend>
             <div class="row cl">
@@ -53,7 +53,7 @@
                     <span class="select-box">
 							<select id="se_city" class="select" size="1" name="se_city"
                                     onmousedown="this.size=6" onblur="this.size=1" onchange="this.size=1">
-								<option value="0">{:getCityName($userinfo.region,1)}</option>
+								<option value="{:getCityName($userinfo.region,1)}">{:getCityName($userinfo.region,2)}</option>
 							</select>
                     </span>
                 </div>
@@ -126,11 +126,11 @@
             format:'yyyy-mm-dd',
             minView:'month'
         });
-        //二级城市获取-点击二级
+        //二级城市-点击二级获取信息
         $('#se_city').click(function () {
             once();
         });
-        //二级城市获取-点击一级
+        //二级城市-点击一级获取信息
         $('#city').change(function () {
             city_id = $(this).val();
             url = SCOPE.city_url;
@@ -148,6 +148,7 @@
                 }
             },'json');
         });
+
     });
 </script>
 </body>
