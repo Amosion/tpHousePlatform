@@ -24,7 +24,11 @@ class Info extends Controller
      * @return mixed
      */
     public function index(){
-        return $this->fetch();
+        $user = session('account','','user');
+        $info = $this->obj->getLandHouse($user->id);
+        return $this->fetch('',[
+            'info' => $info
+        ]);
     }
     /**
      * 房屋添加页面
@@ -58,7 +62,7 @@ class Info extends Controller
             'type' => $data['type_shi'].','.$data['type_ting'].','.$data['type_wei'],
             'rent_type' => $data['rent_type'],
             'orient' => $data['orient'],
-            'city' => $data['city'].','.$data['se_city'],
+            'city' => empty($data['se_city']) ? $data['city'] : $data['city'].','.$data['se_city'],
             'address' => $data['address'],
             'certify' => $data['certify'],
             'image' => $data['image'],

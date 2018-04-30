@@ -26,4 +26,24 @@ class Info extends Model
         return $this->id;
     }
 
+    /**
+     * 根据landlordid获取房屋信息
+     * @param int $userId
+     * @return false|\PDOStatement|string|\think\Collection
+     */
+    public function getLandHouse($userId = 0){
+        $data = [
+            'owner_id' => $userId
+        ];
+        $order = [
+            'id' => 'desc'
+        ];
+        return $this->where($data)->order($order)->select();
+    }
+    public function getHouseByStatus($status = 0){
+        $data = [
+            'status' => $status
+        ];
+        return $this->where($data)->select();
+    }
 }

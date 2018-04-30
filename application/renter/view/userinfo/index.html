@@ -53,7 +53,7 @@
                     <span class="select-box">
 							<select id="se_city" class="select" size="1" name="se_city" autocomplete="off"
                                     onmousedown="this.size=6" onblur="this.size=1" onchange="this.size=1">
-								<option value=0>{:getCityName($userinfo.region,1)}</option>
+								<option value={:getCityName($userinfo.region,1)}>{:getCityName($userinfo.region,2)}</option>
 							</select>
                     </span>
                 </div>

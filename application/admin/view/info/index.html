@@ -1,0 +1,32 @@
+{include file='public/head'}
+<div class="pd-30">
+    <table class="table table-border table-bg table-bordered table-hover">
+        <thead>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="10%">房屋名字</th>
+            <th width="10%">房东</th>
+            <th width="10%">详情</th>
+            <th width="5%">状态</th>
+            <th width="10%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name='info' id='vo'}
+        <tr>
+            <th>{$vo.id}</th>
+            <th>{$vo.name}</th>
+            <th>{:landlordName($vo.owner_id)}</th>
+            <th><a href="#">查看</a></th>
+            <th>{:status($vo.status)}</th>
+            <th>
+                <a href="{:url('info/status',['status' => 1,'id' => $vo.id])}"><i class="Hui-iconfont">&#xe6e1;</i>通过</a>
+                <a onclick="system_deny('{:url('info/status',['status' => -1,'id' => $vo.id])}')"><i class="Hui-iconfont">&#xe6dd;</i>否决</a>
+            </th>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+</div>
+<script src="__STATIC__/dist/js/common.js"></script>
+{include file='public/foot'}

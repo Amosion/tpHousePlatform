@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-list
+{include file='public/head'}
+<div class="pd-30">
+    <table class="table table-border table-bg table-bordered table-hover">
+        <thead>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="10%">房屋名字</th>
+            <th width="10%">价钱</th>
+            <th width="10%">面积</th>
+            <th width="10%">户型</th>
+            <th width="10%">租赁类型</th>
+            <th width="10%">朝向</th>
+            <th width="10%">所在城市</th>
+            <th width="5%">状态</th>
+            <th width="10%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name='info' id='vo'}
+        <tr>
+            <th>{$vo.id}</th>
+            <th>{$vo.name}</th>
+            <th>{$vo.price}</th>
+            <th>{$vo.area}</th>
+            <th>{:houseTypeShow($vo.type)}</th>
+            <th>{if condition="$vo.rent_type eq 1"}整租{else /}合租{/if}</th>
+            <th>{$vo.orient}</th>
+            <th>{:getCityName($vo.city,2)}</th>
+            <th>{:status($vo.status)}</th>
+            <th>
+                <a onClick="system_edit()"><i class="Hui-iconfont">&#xe6df;</i>修改</a>
+                <a onclick="system_del()"><i class="Hui-iconfont">&#xe609;</i>删除</a>
+            </th>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+</div>
+{include file='public/foot'}
+<script>
+    $(function(){
+        $('.radio-box input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+    });
+    //修改信息
+    function system_edit(title,url,id,w,h){
+        layer_show(title,url,w,h);
+    }
+    //删除信息
+    function system_del(url){
+        layer.confirm('确认要删除吗？',function(){
+            window.location.href = url;
+        });
+    }
+</script>
 </body>
 </html>

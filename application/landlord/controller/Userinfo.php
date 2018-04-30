@@ -45,7 +45,7 @@ class Userinfo extends Controller
             'user_id' => $data['user_id'],
             'nickname' => $data['nickname'] ? $data['nickname']:'',
             'sex' => $data['sex'],
-            'region' => $data['city'].','.$data['se_city'],
+            'region' => empty($data['se_city']) ? $data['city'] : $data['city'].','.$data['se_city'],
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'birthday' => $data['birthday']
