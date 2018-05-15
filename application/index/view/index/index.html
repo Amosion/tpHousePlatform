@@ -1,45 +1,8 @@
 {include file='public/head'}
 <div id="container">
-    <header class="navbar-wrapper">
-        <div class="navbar navbar-black">
-            <div class="container cl">
-                <a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">House</a>
-                <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="#">House</a>
-                <span class="logo navbar-slogan f-l mr-10 hidden-xs"></span>
-                <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
-                <nav class="nav navbar-nav nav-collapse" role="navigation" id="Hui-navbar">
-                    <ul class="cl">
-                        <li class="current"><a href="/">首页</a></li>
-                        <li class="dropDown dropDown_hover"><a id="city" href="#" class="dropDown_A">{$city}<i class="Hui-iconfont">&#xe6d5;</i></a>
-                            <ul class="dropDown-menu menu radius box-shadow">
-                                {volist name='citys' id='vo'}
-                                <li><a href="{:url('index/index',['city' => $vo.name,'id' => $vo.id])}">{$vo.name}</a></li>
-                                {/volist}
-                            </ul>
-                        </li>
-                        <li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">二级城市 <i class="Hui-iconfont">&#xe6d5;</i></a>
-                            <ul id="se_city" class="dropDown-menu menu radius box-shadow">
-                                {volist name='se_citys' id='vo'}
-                                <li><a href="#">{$vo.name}</a></li>
-                                {/volist}
-                            </ul>
-                        </li>
-                        <li class="f-r"><a>注册</a></li>
-                        <li class="f-r"><a>登录</a></li>
-                    </ul>
-                </nav>
-                <nav class="navbar-userbar hidden-xs">
-                    <form>
-                        <input id="search" type="text" name="search" style="width: 300px">
-                        <button class="btn btn-default" type="submit">搜索</button>
-                    </form>
-                </nav>
-            </div>
-        </div>
-    </header>
+    {include file='public/nav'}
     <div id="content">
         <div id="content-header">
-
         </div>
         <div id="content-list">
             <ul>
@@ -58,7 +21,7 @@
                     <div class="text-box">333</div>
                 </li>
                 {volist name='houseInfo' id='vo'}
-                <a href="#">
+                <a href="{:url('index/detail',['house_id' => $vo.id])}">
                     <li class="box pull-left">
                         <div class="img-box"><img src="{$vo.image}" width="200px"></div>
                         <div class="text-box">{$vo.name}</div><span>{$vo.price}</span>
@@ -71,10 +34,7 @@
 </div>
 {include file='public/foot'}
 <script>
-    var SCOPE = {
-        'city_id' : '{$city_id}',
-        'city_url': '{:url('api/city/getCitysByParentId')}'
-    };
+
 </script>
 </body>
 </html>

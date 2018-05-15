@@ -1,0 +1,26 @@
+{include file='public/head'}
+<div id="container">
+    {include file='public/nav'}
+    <div id="house-content" class="pd-10">
+        <div class="house">
+            <div class="house-img f-l"><img src="{$houseInfo.image}"></div>
+            <div class="house-info f-l">
+                <div class="name">名称：{$houseInfo.name}</div>
+                <div class="type">户型：{$houseInfo.type}</div>
+                <div class="price">价格：{$houseInfo.price}</div>
+                <div class="area">面积：{$houseInfo.area}</div>
+                <div class="rent_type">租赁类型：{$houseInfo.rent_type}</div>
+                <div class="orient">房屋朝向：{$houseInfo.orient}</div>
+                <div class="description">房屋描述：{$houseInfo.description}</div>
+                <div class="address">地址：{$houseInfo.address}</div>
+            </div>
+            <div class="">
+
+            </div>
+        </div>
+        <div id="comment"></div>
+    </div>
+</div>
+{include file='public/foot'}
+</body>
+</html>

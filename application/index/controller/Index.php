@@ -3,11 +3,23 @@ namespace app\index\controller;
 
 class Index extends Base
 {
+    //返回首页
     public function index()
     {
-        $houseInfo = model('info')->getHouseByStatus(1);
+        //根据城市获取房屋信息
+        $houseInfo = model('info')->getHouseByCity($this->city_id,$this->se_city_id);
         return $this->fetch('',[
             'houseInfo' => $houseInfo,
         ]);
     }
+    //返回详情页
+    public function detail(){
+        $id = input('get.house_id');
+        $houseInfo = model('info')->getHouseById($id);
+
+        return $this->fetch('',[
+            'houseInfo' => $houseInfo
+        ]);
+    }
+
 }

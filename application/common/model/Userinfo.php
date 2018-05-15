@@ -20,9 +20,7 @@ class Userinfo extends User
         $data = [
             'user_id' => $user_id
         ];
-        $order = [
-            'id' => 'desc'
-        ];
-        return $this->where($data)->order($order)->find();
+
+        return $this->where($data)->find();
     }
 }

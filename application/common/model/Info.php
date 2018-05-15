@@ -40,10 +40,28 @@ class Info extends Model
         ];
         return $this->where($data)->order($order)->select();
     }
-    public function getHouseByStatus($status = 0){
+
+    /**
+     * 根据id获取房源信息
+     * @param int $id
+     * @return false|\PDOStatement|string|\think\Collection
+     */
+    public function getHouseById($id = 0){
         $data = [
-            'status' => $status
+            'id' => $id,
+            'status' => 1
         ];
-        return $this->where($data)->select();
+        return $this->where($data)->find();
+    }
+
+    public function getHouseByCity($city,$seCity){
+        $data = [
+            'status' => 1,
+            'city' => $city.','.$seCity,
+        ];
+        $order = [
+            'id' => 'desc'
+        ];
+        return $this->where($data)->order($order)->select();
     }
 }
