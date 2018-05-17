@@ -106,3 +106,16 @@ function landlordName($ownerId){
     $user = model('Userinfo')->getUserInfo($ownerId);
     return $user->nickname;
 }
+
+/**
+ * 户型显示
+ * @param $type
+ * @return string
+ */
+function showType($type){
+    if(empty($type)){
+        echo '参数不能为空';
+    }
+    $houseType = explode(',',$type);
+    return $houseType[0].'室'.$houseType[1].'厅'.$houseType[2].'卫';
+}

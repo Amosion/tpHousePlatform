@@ -16,9 +16,11 @@ class Index extends Base
     public function detail(){
         $id = input('get.house_id');
         $houseInfo = model('info')->getHouseById($id);
+        $evalInfo = model('evaluate')->getEvalInfo($id);
 
         return $this->fetch('',[
-            'houseInfo' => $houseInfo
+            'houseInfo' => $houseInfo,
+            'evalInfo' => $evalInfo
         ]);
     }
 

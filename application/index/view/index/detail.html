@@ -1,24 +1,49 @@
 {include file='public/head'}
 <div id="container">
     {include file='public/nav'}
-    <div id="house-content" class="pd-10">
-        <div class="house">
+    <div id="house-content" class="">
+        <div class="house cl">
             <div class="house-img f-l"><img src="{$houseInfo.image}"></div>
-            <div class="house-info f-l">
+            <div class="house-info">
                 <div class="name">名称：{$houseInfo.name}</div>
-                <div class="type">户型：{$houseInfo.type}</div>
-                <div class="price">价格：{$houseInfo.price}</div>
-                <div class="area">面积：{$houseInfo.area}</div>
-                <div class="rent_type">租赁类型：{$houseInfo.rent_type}</div>
-                <div class="orient">房屋朝向：{$houseInfo.orient}</div>
-                <div class="description">房屋描述：{$houseInfo.description}</div>
-                <div class="address">地址：{$houseInfo.address}</div>
+                <div class="type">户型：<span>{:showType($houseInfo.type)}</span></div>
+                <div class="price">价格：<span>{$houseInfo.price}元</span></div>
+                <div class="area">面积：<span>{$houseInfo.area}m<sup>2</sup></span></div>
+                <div class="rent_type">租赁类型：<span>{if condition="$houseInfo.rent_type eq 1"}整租{else /}合租{/if}</span></div>
+                <div class="orient">房屋朝向：<span>{$houseInfo.orient}</span></div>
+                <div class="description">房屋描述：<span>{$houseInfo.description}</span></div>
+                <div class="address">地址：<span>{$city}{$se_city}{$houseInfo.address}</span></div>
             </div>
-            <div class="">
-
+            <div class="button">
+                <input class="btn btn-primary size-L radius" type="button" value="预约">
+                <input class="btn btn-warning size-L radius" type="button" value="收藏">
             </div>
         </div>
-        <div id="comment"></div>
+        <div id="comment">
+            <form class="row cl" method="post" action="{:url('evaluate/add')}">
+                <input type="hidden" name="house_id" value="{$houseInfo->id}">
+                <div class="formControls col-sm-10">
+                    <textarea class="textarea radius" type="text" placeholder="说点什么" name="comment" required></textarea>
+                </div>
+                <input id="send" class="btn btn-primary col-sm-2" type="submit" value="发表评论">
+            </form>
+            <ul class="commentList">
+                {volist name='evalInfo' id='vo'}
+                <li class="item cl"> <a href="#"><i class="avatar size-L radius"><img alt="。。。" src="__STATIC__/dist/img/user3-128x128.jpg"></i></a>
+                    <div class="comment-main">
+                        <header class="comment-header">
+                            <div class="comment-meta"><a class="comment-author" href="#">{$vo.user_id}</a> 评论于
+                                <time>{$vo.create_time}</time>
+                            </div>
+                        </header>
+                        <div class="comment-body">
+                            <p>{$vo.description}</p>
+                        </div>
+                    </div>
+                </li>
+                {/volist}
+            </ul>
+        </div>
     </div>
 </div>
 {include file='public/foot'}

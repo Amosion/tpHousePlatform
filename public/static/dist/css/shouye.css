@@ -3,14 +3,38 @@
     margin-left: 10px;
     width: 200px;
     display: inline-block;
-    border: 1px solid black;
+    box-shadow: 0 5px 5px #888888;
 }
-#house-content {
-
+#house-content{
+    margin: 2% 20%;
+}
+.house {
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px #888888;
 }
 .house-img {
     margin: 10px 10px;
+    box-shadow: 5px 5px 10px #888888;
+}
+img.house-img {
+    width: 450px;
+    height: 300px;
 }
 .house-info {
     margin: 10px 10px;
+    display: inline-block;
+    font-size: 20px;
+}
+.house-info span{
+    font-size: 14px;
+}
+.house-info .name {
+    font-size: 26px;
+}
+.button {
+    margin-bottom: 20px;
+}
+#comment {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
