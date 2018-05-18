@@ -35,5 +35,16 @@ class User extends Model
     public function updateById($data, $id){
         return $this->allowField(true)->save($data, ['id'=>$id]);
     }
+    /**
+     * 据id获取账号信息
+     * @param $id
+     * @return false|\PDOStatement|string|\think\Collection
+     */
+    public function getUserById($id){
+        $data = [
+            'id' => $id
+        ];
+        return $this->where($data)->find();
+    }
 
 }

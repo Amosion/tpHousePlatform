@@ -19,12 +19,11 @@ class Evaluate extends Base
             $this->error('非post方式提交');
         }
         //获取帐号信息
-        $account = session('account','','user');
+        $account = $this->getLoginUser();
         if(!$account){
             $this->error('请登录评论',url('user/login/index'));
         }
         $data = input('post.');
-
         $commentData = [
             'description' => $data['comment'],
             'user_id' => $account->id,

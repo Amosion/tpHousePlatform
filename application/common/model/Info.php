@@ -54,6 +54,12 @@ class Info extends Model
         return $this->where($data)->find();
     }
 
+    /**
+     * 根据城市获取房屋信息
+     * @param $city
+     * @param $seCity
+     * @return false|\PDOStatement|string|\think\Collection
+     */
     public function getHouseByCity($city,$seCity){
         $data = [
             'status' => 1,
@@ -64,4 +70,5 @@ class Info extends Model
         ];
         return $this->where($data)->order($order)->select();
     }
+
 }

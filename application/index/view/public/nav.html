@@ -24,8 +24,9 @@
                     </li>
                     {if condition="$user"}
                     <li class="f-r"><a href="{:url('user/login/logout')}">退出</a></li>
-                    <li class="f-r"><a>欢迎您：{$user->username}</a></li>
+                    <li class="f-r"><a href="{:url('user/login/index')}">欢迎您：{$user->username}</a></li>
                     {else /}
+                    <li class="f-r"><a href="#">成为房东</a></li>
                     <li class="f-r"><a href="{:url('user/register/index')}">注册</a></li>
                     <li class="f-r"><a href="{:url('user/login/index')}">登录</a></li>
                     {/if}

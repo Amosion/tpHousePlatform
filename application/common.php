@@ -44,6 +44,11 @@ function getCityName($region,$flag){
                 $cityVal = $seCity->name;
             }
             break;
+        case 3:
+            if($cityId){
+                $city = model('City')->get($cityId);
+                $cityVal = $city->name;
+            }
         default;
     }
     return $cityVal;
@@ -114,8 +119,59 @@ function landlordName($ownerId){
  */
 function showType($type){
     if(empty($type)){
-        echo '参数不能为空';
+        echo '参数不能为空';return;
     }
     $houseType = explode(',',$type);
     return $houseType[0].'室'.$houseType[1].'厅'.$houseType[2].'卫';
+}
+
+/**
+ * 根据userId获取用户名和用户图片
+ * flag = 0 用户名 / flag = 1 用户图片
+ * @param $userId
+ * @param $flag
+ * @return mixed
+ */
+function evalUserShow($userId,$flag){
+    if(!$userId){
+        echo '参数没有传递';return;
+    }
+    $user = model('User')->getUserById($userId);
+    if(!$flag){
+        return $user->username;
+    }else{
+        return $user->image;
+    }
+}
+
+/**
+ * 显示房屋名字
+ * @param $id
+ * @return string|void
+ */
+function houseShowById($id){
+    if(!$id){
+        echo '参数没有传递';return;
+    }
+    $houseInfo = model('Info')->getHouseById($id);
+    if(!$houseInfo){
+        return '';
+    }
+    return $houseInfo->name;
+}
+
+/**
+ * 预约状态
+ * @param $status
+ * @return string
+ */
+function orderStatus($status){
+    $str = '';
+    switch ($status){
+        case 0 : $str = '<span class="label label-primary size-L radius">已预约</span>';break;
+        case 1 : $str = '<span class="label label-success size-L radius">预约成功</span>';break;
+        case -1 : $str = '<span class="label label-danger size-L radius">预约失败</span>';break;
+        default;
+    }
+    return $str;
 }

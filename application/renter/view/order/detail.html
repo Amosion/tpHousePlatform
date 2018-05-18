@@ -1,0 +1,93 @@
+{include file='public/head'}
+<div class="pd-20">
+    <form action="" method="post" class="form form-horizontal" id="demoform">
+        <fieldset>
+            <legend>房屋信息</legend>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">房屋名称：</label>
+                <div class="formControls col-xs-4 col-sm-3">
+                    {$houseInfo.name}
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">描述：</label>
+                <div class="formControls col-xs-4 col-sm-3">
+                    <textarea class="textarea" autocomplete="off">{$houseInfo.description}</textarea>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">价格：</label>
+                <div class="formControls col-xs-4 col-sm-2">
+                    {$houseInfo.price}
+                </div>
+                <label class="va-m">元</label>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">面积：</label>
+                <div class="formControls col-xs-4 col-sm-2">
+                    {$houseInfo.area}
+                </div>
+                <label class="va-m">m<sup>2</sup></label>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">户型：</label>
+                <div class="formControls col-xs-4 col-sm-4">
+                    {:showType($houseInfo.type)}
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">租赁类型：</label>
+                <div class="formControls skin-minimal col-xs-4 col-sm-3">
+                    <div class="radio-box">
+                        <input type="radio" id="yes-1" name="rent_type" value="1" {if condition="$houseInfo.rent_type eq 1"}checked=""{/if}
+                               style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0; padding: 0; background: rgb(255, 255, 255); border: 0; opacity: 0;">
+                        <label for="yes-1">整租</label>
+                    </div>
+                    <div class="radio-box">
+                        <input type="radio" id="no-0" name="rent_type" value="0" {if condition="$houseInfo.rent_type eq 0"}checked=""{/if}
+                               style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0; padding: 0; background: rgb(255, 255, 255); border: 0; opacity: 0;">
+                        <label for="no-0" class="">合租</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">房屋方位：</label>
+                <div class="formControls col-xs-4 col-sm-3">
+                    {$houseInfo.orient}
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">地址：</label>
+                <div class="formControls col-xs-4 col-sm-2">
+                    <span class="select-box">
+                        {:getCityName($houseInfo.city,3)}
+                    </span>
+                </div>
+                <div class="formControls col-xs-4 col-sm-2">
+                    <span class="select-box">
+                        {:getCityName($houseInfo.city,2)}
+                    </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">详细地址：</label>
+                <div class="formControls col-xs-4 col-sm-3">
+                    <textarea class="textarea" autocomplete="off">{$houseInfo.address}</textarea>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{include file='public/foot'}
+<script>
+    $(function () {
+        //单选框
+        $('.radio-box input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+    });
+</script>
+</body>
+</html>

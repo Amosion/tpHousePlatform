@@ -17,10 +17,17 @@ class Index extends Base
         $id = input('get.house_id');
         $houseInfo = model('info')->getHouseById($id);
         $evalInfo = model('evaluate')->getEvalInfo($id);
+        $user = $this->getLoginUser();
+        if(!$user){
+            $orderInfo = '';
+        }else{
+            $orderInfo = model('Order')->getOrderInfo($id,$user->id);
+        }
 
         return $this->fetch('',[
             'houseInfo' => $houseInfo,
-            'evalInfo' => $evalInfo
+            'evalInfo' => $evalInfo,
+            'orderInfo' => $orderInfo
         ]);
     }
 

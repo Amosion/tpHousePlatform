@@ -6,17 +6,12 @@
         </div>
         <div id="content-list">
             <ul>
-                <a href="#">
-                    <li class="box pull-left">
-                        <div class="img-box"><img src="__STATIC__/dist/img/user2-160x160.jpg"></div>
-                        <div class="text-box">666</div>
-                    </li>
-                </a>
                 {volist name='houseInfo' id='vo'}
                 <a href="{:url('index/detail',['house_id' => $vo.id])}">
                     <li class="box pull-left">
                         <div class="img-box"><img src="{$vo.image}" width="200px"></div>
-                        <div class="text-box">名字：{$vo.name}</div><span>价格：{$vo.price}</span>
+                        <div class="text-box">名字：{$vo.name}</div>
+                        <span>价格：{$vo.price}</span>
                     </li>
                 </a>
                 {/volist}
@@ -25,8 +20,5 @@
     </div>
 </div>
 {include file='public/foot'}
-<script>
-
-</script>
 </body>
 </html>

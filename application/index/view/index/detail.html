@@ -15,8 +15,11 @@
                 <div class="address">地址：<span>{$city}{$se_city}{$houseInfo.address}</span></div>
             </div>
             <div class="button">
-                <input class="btn btn-primary size-L radius" type="button" value="预约">
-                <input class="btn btn-warning size-L radius" type="button" value="收藏">
+                {if condition="$orderInfo"}
+                <input class="btn btn-secondary size-L radius" type="button" value="已预约">
+                {else /}
+                <input id="order" class="btn btn-primary size-L radius" type="submit" value="预约">
+                {/if}
             </div>
         </div>
         <div id="comment">
@@ -29,10 +32,10 @@
             </form>
             <ul class="commentList">
                 {volist name='evalInfo' id='vo'}
-                <li class="item cl"> <a href="#"><i class="avatar size-L radius"><img alt="。。。" src="__STATIC__/dist/img/user3-128x128.jpg"></i></a>
+                <li class="item cl"> <a href="#"><i class="avatar size-L radius"><img alt="。。。" src="{:evalUserShow($vo.user_id,1)}"></i></a>
                     <div class="comment-main">
                         <header class="comment-header">
-                            <div class="comment-meta"><a class="comment-author" href="#">{$vo.user_id}</a> 评论于
+                            <div class="comment-meta"><a class="comment-author" href="#">{:evalUserShow($vo.user_id,0)}</a> 评论于
                                 <time>{$vo.create_time}</time>
                             </div>
                         </header>
@@ -47,5 +50,23 @@
     </div>
 </div>
 {include file='public/foot'}
+<script>
+    $(function () {
+        var order_url = '{:url('api/order/add')}';
+        $('#order').click(function () {
+            url = order_url;
+            var house_id = '{$houseInfo->id}';
+            postData = {'id': house_id};
+            $.post(url,postData,function (res) {
+                if(res.status == 1){
+                    alert('预约成功');
+                    location.reload();
+                }else{
+                    alert('预约失败,请先登录');
+                }
+            },'json');
+        });
+    });
+</script>
 </body>
 </html>

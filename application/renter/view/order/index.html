@@ -1,0 +1,30 @@
+{include file='public/head'}
+<div class="pd-30">
+    <table class="table table-border table-bg table-bordered table-hover">
+        <thead>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="10%">房屋名字</th>
+            <th width="5%">状态</th>
+            <th width="10%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name='orderInfo' id='vo'}
+        <tr>
+            <th>{$vo.id}</th>
+            <th>{:houseShowById($vo.house_id)}</th>
+            <th>{:orderStatus($vo.status)}</th>
+            <th>
+                <a onclick="system_edit('房屋信息','{:url('order/detail',['id' => $vo.id])}')"><i class="Hui-iconfont">&#xe6e1;</i>查看</a>
+                <a onclick="system_del('{:url('order/status',['status' => -1,'id' => $vo.id])}')"><i class="Hui-iconfont">&#xe6dd;</i>取消</a>
+            </th>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+</div>
+{include file='public/foot'}
+<script src="__STATIC__/dist/js/common.js"></script>
+</body>
+</html>

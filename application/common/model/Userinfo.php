@@ -20,7 +20,7 @@ class Userinfo extends User
         $data = [
             'user_id' => $user_id
         ];
-
         return $this->where($data)->find();
     }
+
 }

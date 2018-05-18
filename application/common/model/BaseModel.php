@@ -25,5 +25,13 @@ class BaseModel extends Model
         $this->data($data)->allowField(true)->save();
         return $this->id;
     }
-
+    /**
+     * 根据id更新数据
+     * @param $data
+     * @param $id
+     * @return false|int
+     */
+    public function updateById($data, $id){
+        return $this->allowField(true)->save($data, ['id'=>$id]);
+    }
 }
