@@ -51,9 +51,29 @@ class Order extends BaseModel
             'renter_id' => $userId
         ];
         $order = [
-            'update_time' => 'desc'
+            'id' => 'desc'
         ];
         return $this->where($data)->order($order)->select();
     }
+    /**
+     * 根据状态获取预约信息
+     * @param $status
+     * @return false|\PDOStatement|string|\think\Collection
+     */
+    public function getOrderByStatus($status){
+        $data = [
+            'status' => ['egt',$status],
+        ];
+        return $this->where($data)->select();
 
+    }
+    /**
+     * 根据houseId更新数据
+     * @param $data
+     * @param $houseId
+     * @return false|int
+     */
+    public function updateByouseId($data, $houseId){
+        return $this->allowField(true)->save($data, ['house_id'=>$houseId]);
+    }
 }

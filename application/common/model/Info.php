@@ -71,4 +71,19 @@ class Info extends Model
         return $this->where($data)->order($order)->select();
     }
 
+    /**
+     * 根据状态获取房屋信息
+     * @param int $status
+     * @return false|\PDOStatement|string|\think\Collection
+     */
+    public function getHouseByStatus($status = 0){
+        $data = [
+            'status' => 0,
+        ];
+        $order = [
+            'id' => 'desc'
+        ];
+        return $this->where($data)->order($order)->select();
+    }
+
 }

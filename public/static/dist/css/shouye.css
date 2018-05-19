@@ -1,7 +1,11 @@
+#content {
+    margin-left: 10px;
+    margin-right: 10px;
+}
 .box {
     margin-top: 10px;
     margin-left: 10px;
-    width: 200px;
+    width: 300px;
     display: inline-block;
     box-shadow: 0 5px 5px #888888;
 }

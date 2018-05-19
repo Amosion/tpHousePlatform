@@ -24,7 +24,6 @@ class Info extends Controller
             'info' => $info
         ]);
     }
-
     /**
      * 房屋状态更改
      */

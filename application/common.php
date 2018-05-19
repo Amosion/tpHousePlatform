@@ -161,7 +161,7 @@ function houseShowById($id){
 }
 
 /**
- * 预约状态
+ * 租客预约状态
  * @param $status
  * @return string
  */
@@ -174,4 +174,32 @@ function orderStatus($status){
         default;
     }
     return $str;
+}
+/**
+ * 房东预约状态
+ * @param $status
+ * @return string
+ */
+function orderStatusBylandlord($status){
+    $str = '';
+    switch ($status){
+        case 0 : $str = '<span class="label label-primary size-L radius">预约中</span>';break;
+        case 1 : $str = '<span class="label label-success size-L radius">接受预约</span>';break;
+        case -1 : $str = '<span class="label label-danger size-L radius">拒绝预约</span>';break;
+        default;
+    }
+    return $str;
+}
+
+/**
+ * 显示租客昵称
+ * @param $renterId
+ */
+function renterName($renterId){
+    if(!$renterId){
+        echo '参数没有传递';
+        return;
+    }
+    $user = model('Userinfo')->getUserInfo($renterId);
+    return $user->nickname;
 }

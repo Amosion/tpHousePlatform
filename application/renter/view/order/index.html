@@ -16,8 +16,12 @@
             <th>{:houseShowById($vo.house_id)}</th>
             <th>{:orderStatus($vo.status)}</th>
             <th>
+                {if condition="$vo.status eq 0"}
                 <a onclick="system_edit('房屋信息','{:url('order/detail',['id' => $vo.id])}')"><i class="Hui-iconfont">&#xe6e1;</i>查看</a>
                 <a onclick="system_del('{:url('order/status',['status' => -1,'id' => $vo.id])}')"><i class="Hui-iconfont">&#xe6dd;</i>取消</a>
+                {elseif condition="$vo.status eq 1"/}
+                <a onclick="system_edit('房东电话','{:url('order/landTel',['house_id' => $vo.house_id])}')"><i class="Hui-iconfont">&#xe6e1;</i>联系方式</a>
+                {/if}
             </th>
         </tr>
         {/volist}

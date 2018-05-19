@@ -47,5 +47,21 @@ class Order extends Controller
             $this->success('更新成功');
         }
     }
+    //房东电话
+    public function landTel(){
+        $id = input('get.house_id');
+        if(!$id){
+            $this->error('id不合法');
+        }
+        $house = model('Info')->getHouseById($id);
+        $ownId = $house->owner_id;
+        if(!$ownId){
+            $this->error('id又不合法');
+        }
+        $user = model('Userinfo')->getUserInfo($ownId);
+        return $this->fetch('',[
+            'user' => $user
+        ]);
+    }
 
 }
